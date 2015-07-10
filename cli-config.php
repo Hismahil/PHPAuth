@@ -1,5 +1,4 @@
 <?php
-namespace PHPAuth\Config;
 
 require_once "bootstrap.php";
 

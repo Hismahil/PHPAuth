@@ -2,6 +2,8 @@
 
 namespace PHPAuth\Models;
 use Doctrine\Common\Collections\ArrayCollection;
+use \DateTime;
+
 /**
  * @Entity
  * @Table(name="roles")
@@ -85,6 +87,8 @@ class Role {
 	public function initAttributes($data){
 		if(isset($data['role'])) $this->role = $data['role'];
 		if(isset($data['active'])) $this->active = $data['active'];
+		$this->created_at = new DateTime('now');
+		$this->updated_at = new DateTime('now');
 	}
 
 	public function isValid(){
@@ -96,6 +100,6 @@ class Role {
 			filter_var($this->active, FILTER_VALIDATE_BOOLEAN)) $isValid = true;
 		else $isValid = false;
 
-		return false;
+		return $isValid;
 	}
 }

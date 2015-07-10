@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}New Role{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+    <form action="/roles/create" method="post">
+    	<label for="role">Role: </label> <input type="text" id="role" name="role" value="{{role.getRole()}}"/>
+    	<input type="submit" name="commit" />
+    </form>
+{% endblock %}

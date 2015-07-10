@@ -18,9 +18,9 @@ class Session {
      * @JoinColumn(name="user_id", referencedColumnName="id")
      **/
 	protected $user;
-	/** @Column(name="current", type="string") */
-	protected $current;
-	/** @Column(name="expire", type="string") */
+	/** @Column(name="session_id", type="string") */
+	protected $session_id;
+	/** @Column(name="expire", type="time") */
 	protected $expire;
 	/** @Column(name="created_at", type="datetime") */
 	protected $created_at;
@@ -55,19 +55,32 @@ class Session {
 		$this->user = $user;
 	}
 
-	public function getCurrent(){
-		return $this->current;
-	}
-
-	public function setCurrent($current){
-		$this->current = $current;
-	}
-
 	public function getExpire(){
 		return $this->expire;
 	}
 
 	public function setExpire($expire){
 		$this->expire = $expire;
+	}
+
+	public function getSessionId(){
+		return $this->session_id;
+	}
+
+	public function setSessionId($session_id){
+		$this->session_id = $session_id;
+	}
+	
+	public static function create($user){
+		if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+		session_regenerate_id(true);
+		$session_data = array('user_id' => $user->getId(), 'time' => time(), 'id'=> session_id());
+		$_SESSION['user'] = $session_data;
+		return $session_data;
+	}
+
+	public static function isValid(){
+		if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+		return ($_SESSION['user']['time'] - time() < 1800 ? true : false);
 	}
 }

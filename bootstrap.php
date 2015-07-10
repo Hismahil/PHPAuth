@@ -1,20 +1,16 @@
 <?php
 
-namespace PHPAuth\Config;
-
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use PHPAuth\Models;
 
-require_once "defines.php";
-
-require_once "Group.php";
-require_once "Role.php";
-require_once "Session.php";
-require_once "User.php";
+require_once "src/PHPAuth/Models/Role.php";
+require_once "src/PHPAuth/Models/Group.php";
+require_once "src/PHPAuth/Models/User.php";
+require_once "src/PHPAuth/Models/Session.php";
 
 $debug = true;
-$config = Setup::createAnnotationMetadataConfiguration(array(ROOT."/../src/PHPAuth/Models"), $debug);
+$config = Setup::createAnnotationMetadataConfiguration(array("src/PHPAuth/Models"), $debug);
 
 // Configuração de acesso ao banco de dados
 $conn = array(

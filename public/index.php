@@ -10,7 +10,7 @@ $app = New \SlimController\Slim(array(
     'templates.path'             => '../src/PHPAuth/Views',
     'controller.class_prefix'    => '\\PHPAuth\\Controllers',
     'controller.method_suffix'   => 'Action',
-    'controller.template_suffix' => 'html',
+    'controller.template_suffix' => 'html'
 ));
 
 // monolog logger 
@@ -33,7 +33,17 @@ $app->view->parserExtensions = array(new \Slim\Views\TwigExtension());
 
 
 $app->addRoutes(array(
-    '/'            => 'Home:index'
+    '/'                 => 'HomeController:index',
+    '/roles/index'      => 'RolesController:index',
+    '/roles/new'        => 'RolesController:new',
+    '/roles/create'     => array('post' => array('RolesController:create', function() {
+        error_log("Roles create /roles/create");
+    })),
+    '/roles/:id'        => 'RolesController:show',
+    '/roles/:id/update'     => array('put' => array('RolesController:update', function() {
+        error_log("Roles update /roles/update");
+    })),
+    '/roles/:id/edit'   => 'RolesController:edit'
 ));
 
 $app->run();
