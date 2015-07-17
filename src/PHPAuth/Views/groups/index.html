@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Index Groups{% endblock %}
+{% block head %}
+    {{ parent() }}
+    
+{% endblock %}
+{% block content %}
+    <ul id="groups">
+        {% for group in groups %}
+            <li>{{ group.getName() }}</li>
+            <li>
+            	<ul>
+            		{% for role in group.getRoles() %}
+            			<li>{{ role.getRole() }}</li>
+            		{% endfor%}
+            	</ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

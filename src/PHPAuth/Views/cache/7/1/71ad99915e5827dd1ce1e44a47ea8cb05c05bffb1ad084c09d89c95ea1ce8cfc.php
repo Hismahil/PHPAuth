@@ -1,14 +1,14 @@
 <?php
 
-/* roles/index.html */
-class __TwigTemplate_a107ab7a21a9bf2a3998eb0841c6492bb13c092e74a4bfa650b0b5b8d3b7f429 extends Twig_Template
+/* groups/show.html */
+class __TwigTemplate_71ad99915e5827dd1ce1e44a47ea8cb05c05bffb1ad084c09d89c95ea1ce8cfc extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("base.html", "roles/index.html", 1);
+        $this->parent = $this->loadTemplate("base.html", "groups/show.html", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'head' => array($this, 'block_head'),
@@ -29,7 +29,7 @@ class __TwigTemplate_a107ab7a21a9bf2a3998eb0841c6492bb13c092e74a4bfa650b0b5b8d3b
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        echo "Index Roles";
+        echo "Show Group";
     }
 
     // line 4
@@ -47,29 +47,33 @@ class __TwigTemplate_a107ab7a21a9bf2a3998eb0841c6492bb13c092e74a4bfa650b0b5b8d3b
     public function block_content($context, array $blocks = array())
     {
         // line 9
-        echo "    <ul>
-        ";
-        // line 10
+        echo "    <h2>";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["group"]) ? $context["group"] : null), "getName", array(), "method"), "html", null, true);
+        echo "</h2>
+\t<ul>
+\t\t";
+        // line 11
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["roles"]) ? $context["roles"] : null));
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["group"]) ? $context["group"] : null), "getRoles", array(), "method"));
         foreach ($context['_seq'] as $context["_key"] => $context["role"]) {
-            // line 11
-            echo "            <li>";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["role"], "getRole", array(), "method"));
+            // line 12
+            echo "\t\t\t<li>";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["role"], "getRole", array(), "method"), "html", null, true);
             echo "</li>
-        ";
+\t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['role'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 13
-        echo "    </ul>
+        // line 14
+        echo "\t</ul>
+    
 ";
     }
 
     public function getTemplateName()
     {
-        return "roles/index.html";
+        return "groups/show.html";
     }
 
     public function isTraitable()
@@ -79,6 +83,6 @@ class __TwigTemplate_a107ab7a21a9bf2a3998eb0841c6492bb13c092e74a4bfa650b0b5b8d3b
 
     public function getDebugInfo()
     {
-        return array (  66 => 13,  57 => 11,  53 => 10,  50 => 9,  47 => 8,  39 => 5,  36 => 4,  30 => 3,  11 => 1,);
+        return array (  69 => 14,  60 => 12,  56 => 11,  50 => 9,  47 => 8,  39 => 5,  36 => 4,  30 => 3,  11 => 1,);
     }
 }

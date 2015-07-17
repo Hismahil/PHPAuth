@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Show Group{% endblock %}
+{% block head %}
+    {{ parent() }}
+    
+{% endblock %}
+{% block content %}
+    <h2>{{ group.getName() }}</h2>
+	<ul>
+		{% for role in group.getRoles()%}
+			<li>{{ role.getRole() }}</li>
+		{% endfor%}
+	</ul>
+    
+{% endblock %}

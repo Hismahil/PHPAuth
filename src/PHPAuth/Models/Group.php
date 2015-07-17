@@ -2,6 +2,7 @@
 
 namespace PHPAuth\Models;
 use Doctrine\Common\Collections\ArrayCollection;
+use \DateTime;
 
 /**
  * @Entity
@@ -102,12 +103,21 @@ class Group {
 	}
 
 	public function removeRole($role){
-		$this->roles->remove($role);
+		$this->roles->removeElement($role);
 	}
 
+	public function containRole($data){
+		foreach ($this->roles as $role) {
+			if($role->getId() == $data->getId()) return true;
+		}
+		return false;
+	}
+	
 	public function initAttributes($data){
 		if(isset($data['name'])) $this->name = $data['name'];
 		if(isset($data['active'])) $this->active = $data['active'];
+		$this->created_at = new DateTime('now');
+		$this->updated_at = new DateTime('now');
 	}
 
 	public function isValid(){

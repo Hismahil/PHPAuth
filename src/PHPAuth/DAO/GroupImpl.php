@@ -1,44 +1,44 @@
 <?php
 namespace PHPAuth\DAO;
-use PHPAuth\Config;
 
 class GroupImpl implements IGroup {
-	private $en = include_once "bootstrap.php";
+
+	public function __construct(){
+	}
 
 	public function save($group_data){
-		$this->en->persist($group_data);
-		$this->en->flush();
+
+		\PHPAuth\Config\Bootstrap::getInstance()->em()->persist($group_data);
+		\PHPAuth\Config\Bootstrap::getInstance()->em()->flush();
 		
 		return $group_data;
 	}
 
 	public function all(){
-		$repo = $this->en->getRepository('Group');
+
+		$repo = \PHPAuth\Config\Bootstrap::getInstance()->em()->getRepository('PHPAuth\Models\Group');
 		
 		return $repo->findAll();
 	}
 
 	public function find($id){
-		
-		return $this->en->find('Group', $id);
+		return \PHPAuth\Config\Bootstrap::getInstance()->em()->find('PHPAuth\Models\Group', $id);
 	}
 
 	public function find_by($key_value){
-		
-		return $this->en->getRepository('Group')->findOneBy($key_value);
+		return \PHPAuth\Config\Bootstrap::getInstance()->em()->getRepository('PHPAuth\Models\Group')->findOneBy($key_value);
 	}
 
 	public function update($obj){
-		
-		$this->en->merge($obj);
-		$this->en->flush();
+		\PHPAuth\Config\Bootstrap::getInstance()->em()->merge($obj);
+		\PHPAuth\Config\Bootstrap::getInstance()->em()->flush();
 	}
 
 	public function delete($id){
-		$model = $this->find($id);
+
+		$model = $find($id);
 		if($model != null) {
-		
-			$this->en->remove($model);
+			\PHPAuth\Config\Bootstrap::getInstance()->em()->remove($model);
 			return true;
 		}
 		else{

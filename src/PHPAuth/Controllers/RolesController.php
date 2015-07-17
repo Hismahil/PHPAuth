@@ -11,6 +11,7 @@ class RolesController extends \SlimController\SlimController{
 		$this->render('roles/index', array(
             'roles' => $roles->all()
         ));
+		//echo $roles->all()[0]->getRole();
 	}
 
 	public function showAction($id){
@@ -21,15 +22,17 @@ class RolesController extends \SlimController\SlimController{
 	}
 
 	public function editAction($id){
-		$role = new \PHPAuth\DAO\RoleImpl();
+		$roleImpl = new \PHPAuth\DAO\RoleImpl();
+		$role = $roleImpl->find($id);
+
 		$this->render('roles/edit', array(
-            'role' => $role->find($id)
+            'role' => $role, 'action' => "/roles/{$role->getId()}/update", 'edit_mode' => true
         ));
 	}
 
 	public function newAction(){
 		$this->render('roles/new', array(
-            'role' => new \PHPAuth\Models\Role()
+            'role' => new \PHPAuth\Models\Role(), 'action' => '/roles/create', 'edit_mode' => false
         ));
 	}
 
@@ -47,7 +50,6 @@ class RolesController extends \SlimController\SlimController{
 	}
 
 	public function updateAction($id){
-		
 		$roleImpl = new \PHPAuth\DAO\RoleImpl();
 		$role = $roleImpl->find($id);
 

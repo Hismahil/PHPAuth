@@ -1,14 +1,14 @@
 <?php
 
-/* roles/show.html */
-class __TwigTemplate_6cb7db2d2fa6be309b5f339a262958210554cda2866ed4a78fe26a03d25ed659 extends Twig_Template
+/* groups/new.html */
+class __TwigTemplate_d3ed94620bf1a5b8400dc1081013e718ec678772d6e796f998aef9c03c422a67 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("base.html", "roles/show.html", 1);
+        $this->parent = $this->loadTemplate("base.html", "groups/new.html", 1);
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'head' => array($this, 'block_head'),
@@ -29,7 +29,7 @@ class __TwigTemplate_6cb7db2d2fa6be309b5f339a262958210554cda2866ed4a78fe26a03d25
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        echo "Show Role";
+        echo "New Group";
     }
 
     // line 4
@@ -39,7 +39,7 @@ class __TwigTemplate_6cb7db2d2fa6be309b5f339a262958210554cda2866ed4a78fe26a03d25
         echo "    ";
         $this->displayParentBlock("head", $context, $blocks);
         echo "
-    
+   
 ";
     }
 
@@ -47,15 +47,13 @@ class __TwigTemplate_6cb7db2d2fa6be309b5f339a262958210554cda2866ed4a78fe26a03d25
     public function block_content($context, array $blocks = array())
     {
         // line 9
-        echo "    <h2>";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["role"]) ? $context["role"] : null), "getRole", array(), "method"), "html", null, true);
-        echo "</h2>
-";
+        echo "    ";
+        $this->loadTemplate("groups/_form.html", "groups/new.html", 9)->display($context);
     }
 
     public function getTemplateName()
     {
-        return "roles/show.html";
+        return "groups/new.html";
     }
 
     public function isTraitable()

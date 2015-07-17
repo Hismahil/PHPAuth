@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Show User{% endblock %}
+{% block head %}
+    {{ parent() }}
+    
+{% endblock %}
+{% block content %}
+    <h2>{{ user.getUsername() }}</h2>
+    <h3>{{ user.isActive() }}</h3>
+    <ul>
+    	{% for group in user.getGroups() %}
+    		<li>{{ group.getName() }}</li>
+    	{% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,11 @@
+<form action="{{ action }}" method="post">
+	<label for="role">Role: </label> <input type="text" id="role" name="role" value="{{role.getRole()}}"/><br/>
+	{% if edit_mode %}
+		<input type='hidden' name='_METHOD' value='PUT'/>
+	
+		<label>
+	  		<input type="checkbox" id="active" name="active" checked="{{ role.getActive() }}"> Active
+		</label> <br/>
+	{% endif %}
+	<input type="submit" name="commit" />
+</form>

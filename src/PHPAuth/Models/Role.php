@@ -5,7 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use \DateTime;
 
 /**
- * @Entity
+ * @Entity(repositoryClass="PHPAuth\Models\Repositories\RoleRepository")
  * @Table(name="roles")
  */
 class Role {

@@ -1,0 +1,29 @@
+<form action="{{ action }}" method="post">
+	<label for="username">Username: </label> <input type="text" id="username" name="username" value="{{ user.getUsername() }}" /><br/>
+	<label for="password">Password: </label> <input type="password" id="password" name="password" value="" /><br/>
+
+	{% if newer %}
+		<label for="passconfirm">Password Confirmation: </label> <input type="password" id="passconfirm" name="passconfirm" value="" /><br/>
+		{% for group in groups %}
+			<INPUT type="checkbox" name="groups_selected[]" value="{{group.getId()}}"> {{ group.getName() }}
+		{% endfor%}
+	{% endif %}
+
+	{% if edit_mode %}
+		<input type='hidden' name='_METHOD' value='PUT'/>
+		<label for="passconfirm">Password Confirmation: </label> <input type="password" id="passconfirm" name="passconfirm" value="" /><br/>
+		{% for group in groups %}
+			{% if user.containGroup(group) %}
+				<INPUT type="checkbox" name="groups_selected[]" value="{{group.getId()}}" checked="1"> {{ group.getName() }}
+			{% else %}
+				<INPUT type="checkbox" name="groups_selected[]" value="{{group.getId()}}"> {{ group.getName() }}
+			{% endif %}
+		{% endfor %}
+		<label>
+	  		<input type="checkbox" id="active" name="active" checked="{{ user.isActive() }}" value="1"> Active
+		</label> <br/>
+	{% endif %}
+	<br/>
+	<input type="submit" name="commit" />
+	
+</form>

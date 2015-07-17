@@ -2,7 +2,7 @@
 namespace PHPAuth\Models;
 
 use Doctrine\Common\Collections\ArrayCollection;
-
+use \DateTime;
 /**
  * @Entity
  * @Table(name="users")
@@ -36,6 +36,7 @@ class User {
 
 	public function __construct() {
         $this->sessions = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
 	public function getId(){
@@ -71,7 +72,7 @@ class User {
 	}
 
 	public function setPassword($password){
-		$this->password = md5($password);
+		$this->password = $this->generateHash($password);
 	}
 
 	public function getSessions(){
@@ -95,18 +96,26 @@ class User {
 	}
 
 	public function removeGroup($group){
-		$this->groups->remove($group);
+		$this->groups->removeElement($group);
+	}
+
+	public function containGroup($data){
+		foreach ($this->groups as $group) {
+			if($group->getId() == $data->getId()) return true;
+		}
+		return false;
 	}
 
 	public function auth($username, $password){
-		return ($username === $this->username && $this->password === md5($password));
+		return ($username === $this->username && password_verify($password, $this->password));
 	}
 
 	public function initAttributes($data){
 		if(isset($data['username'])) $this->username = $data['username'];
-		if(isset($data['password'])) $this->password = md5($data['password']);
+		if(isset($data['password'])) $this->password = $this->generateHash($data['password']);
 		if(isset($data['active'])) $this->active = $data['active'];
-		if(isset($data['group'])) $this->groups->add($data['group']);
+		$this->created_at = new DateTime('now');
+		$this->updated_at = new DateTime('now');
 	}
 
 	public function isValid(){
@@ -124,5 +133,13 @@ class User {
 		else $isValid = false;
 
 		return $isValid;
+	}
+
+	private function generateHash($pwd){
+		$options = [
+		    'cost' => 11,
+		    'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+		];
+		return password_hash($pwd, PASSWORD_BCRYPT, $options)."\n";
 	}
 }

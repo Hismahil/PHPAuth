@@ -1,5 +1,5 @@
 <?php
 
-require_once "bootstrap.php";
+$em = include_once "Bootstrap.php";
 
-return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager);
+return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($em);

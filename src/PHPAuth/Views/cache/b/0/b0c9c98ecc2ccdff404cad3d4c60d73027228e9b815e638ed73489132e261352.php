@@ -46,23 +46,8 @@ class __TwigTemplate_b0c9c98ecc2ccdff404cad3d4c60d73027228e9b815e638ed73489132e2
     public function block_content($context, array $blocks = array())
     {
         // line 8
-        echo "    <form action=\"/roles/";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["role"]) ? $context["role"] : null), "getId", array(), "method"), "html", null, true);
-        echo "\" method=\"post\">
-    \t<input type='hidden' name='_METHOD' value='PUT'/>
-    \t<label for=\"role\">Role: </label> <input type=\"text\" id=\"role\" name=\"role\" value=\"";
-        // line 10
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["role"]) ? $context["role"] : null), "getRole", array(), "method"), "html", null, true);
-        echo "\"/><br/>
-    \t<label>
-      \t\t<input type=\"checkbox\" id=\"active\" name=\"active\" checked=\"";
-        // line 12
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["role"]) ? $context["role"] : null), "getActive", array(), "method"), "html", null, true);
-        echo "\"> Active
-    \t</label> <br/>
-    \t<input type=\"submit\" name=\"commit\" />
-    </form>
-";
+        echo "    ";
+        $this->loadTemplate("roles/_form.html", "roles/edit.html", 8)->display($context);
     }
 
     public function getTemplateName()
@@ -77,6 +62,6 @@ class __TwigTemplate_b0c9c98ecc2ccdff404cad3d4c60d73027228e9b815e638ed73489132e2
 
     public function getDebugInfo()
     {
-        return array (  60 => 12,  55 => 10,  49 => 8,  46 => 7,  39 => 5,  36 => 4,  30 => 3,  11 => 1,);
+        return array (  49 => 8,  46 => 7,  39 => 5,  36 => 4,  30 => 3,  11 => 1,);
     }
 }

@@ -34,7 +34,7 @@ $app->view->parserExtensions = array(new \Slim\Views\TwigExtension());
 
 $app->addRoutes(array(
     '/'                 => 'HomeController:index',
-    '/roles/index'      => 'RolesController:index',
+    '/roles'      => 'RolesController:index',
     '/roles/new'        => 'RolesController:new',
     '/roles/create'     => array('post' => array('RolesController:create', function() {
         error_log("Roles create /roles/create");
@@ -43,7 +43,27 @@ $app->addRoutes(array(
     '/roles/:id/update'     => array('put' => array('RolesController:update', function() {
         error_log("Roles update /roles/update");
     })),
-    '/roles/:id/edit'   => 'RolesController:edit'
+    '/roles/:id/edit'   => 'RolesController:edit',
+    '/groups'      => 'GroupsController:index',
+    '/groups/new'        => 'GroupsController:new',
+    '/groups/create'     => array('post' => array('GroupsController:create', function() {
+        error_log("Groups create /groups/create");
+    })),
+    '/groups/:id'        => 'GroupsController:show',
+    '/groups/:id/update'     => array('put' => array('GroupsController:update', function() {
+        error_log("Groups update /groups/update");
+    })),
+    '/groups/:id/edit'   => 'GroupsController:edit',
+    '/users'            => 'UsersController:index',
+    '/users/new'        => 'UsersController:new',
+    '/users/create'     => array('post' => array('UsersController:create', function() {
+        error_log("users create /users/create");
+    })),
+    '/users/:id'        => 'UsersController:show',
+    '/users/:id/update'     => array('put' => array('UsersController:update', function() {
+        error_log("users update /users/update");
+    })),
+    '/users/:id/edit'   => 'UsersController:edit'
 ));
 
 $app->run();

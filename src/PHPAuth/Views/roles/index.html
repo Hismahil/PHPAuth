@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}New Role{% endblock %}
+{% block title %}Index Roles{% endblock %}
 {% block head %}
     {{ parent() }}
     
 {% endblock %}
 {% block content %}
-    <ul id="roles">
-        {% for roles in role %}
-            <li>{{ role.getRole() }}</li>
+    <ul>
+        {% for role in roles %}
+            <li>{{ role.getRole()|e }}</li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -1,0 +1,25 @@
+<form action="{{ action }}" method="post">
+	<label for="name">Group Name: </label> <input type="text" id="name" name="name" value="{{ group.getName() }}"/>
+	
+	{% if edit_mode %}
+		{% for role in roles %}
+			{% if group.containRole(role) %}
+				<INPUT type="checkbox" name="roles_selected[]" value="{{role.getId()}}" checked="1"> {{ role.getRole() }}
+			{% else %}
+				<INPUT type="checkbox" name="roles_selected[]" value="{{role.getId()}}"> {{ role.getRole() }}
+			{% endif %}
+			
+		{% endfor %}
+		<input type='hidden' name='_METHOD' value='PUT'/>
+		<br/>
+		<label>
+	  		<input type="checkbox" id="active" name="active" checked="{{ group.isActive() }}" value="1"> Active
+		</label> <br/>
+	{% else %}
+		{% for role in roles %}
+			<INPUT type="checkbox" name="roles_selected[]" value="{{ role.getId() }}"> {{ role.getRole() }}
+		{% endfor %}
+	{% endif%}
+	<input type="submit" name="commit" />
+	
+</form>

@@ -1,54 +1,47 @@
 <?php
 namespace PHPAuth\DAO;
 
-require_once "../src/PHPAuth/Models/Role.php";
-
 class RoleImpl implements IRole {
-	
-	private $em;
 
 	public function __construct(){
-		require_once "../bootstrap.php";
-		$this->em = $entityManager;
 	}
 
 	public function save($role_data){
-		
-		$this->em->persist($role_data);
-		$this->em->flush();
+
+		\PHPAuth\Config\Bootstrap::getInstance()->em()->persist($role_data);
+		\PHPAuth\Config\Bootstrap::getInstance()->em()->flush();
 		
 		return $role_data;
 	}
 
 	public function all(){
-		
-		$repo = $this->em->getRepository('PHPAuth\Models\Role');
+
+		$repo = \PHPAuth\Config\Bootstrap::getInstance()->em()->getRepository('PHPAuth\Models\Role');
 		
 		return $repo->findAll();
 	}
 
 	public function find($id){
-		
-		return $this->em->find('PHPAuth\Models\Role', $id);
+
+		return \PHPAuth\Config\Bootstrap::getInstance()->em()->find('PHPAuth\Models\Role', $id);
 	}
 
 	public function find_by($key_value){
-		
-		return $this->em->getRepository('PHPAuth\Models\Role')->findOneBy($key_value);
+
+		return \PHPAuth\Config\Bootstrap::getInstance()->em()->getRepository('PHPAuth\Models\Role')->findOneBy($key_value);
 	}
 
 	public function update($obj){
-		
-		$this->em->merge($obj);
-		$this->em->flush();
+
+		\PHPAuth\Config\Bootstrap::getInstance()->em()->merge($obj);
+		\PHPAuth\Config\Bootstrap::getInstance()->em()->flush();
 	}
 
 	public function delete($id){
 
-		$model = $this->find($id);
+		$model = $find($id);
 		if($model != null) {
-			require_once "../bootstrap.php";	
-			$this->em->remove($model);
+			\PHPAuth\Config\Bootstrap::getInstance()->em()->remove($model);
 			return true;
 		}
 		else{

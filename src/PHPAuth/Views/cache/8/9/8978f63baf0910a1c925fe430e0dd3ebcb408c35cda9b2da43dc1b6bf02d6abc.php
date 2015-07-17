@@ -39,24 +39,16 @@ class __TwigTemplate_8978f63baf0910a1c925fe430e0dd3ebcb408c35cda9b2da43dc1b6bf02
         echo "    ";
         $this->displayParentBlock("head", $context, $blocks);
         echo "
-    <style type=\"text/css\">
-        .important { color: #336699; }
-    </style>
+   
 ";
     }
 
-    // line 10
+    // line 8
     public function block_content($context, array $blocks = array())
     {
-        // line 11
-        echo "    <form action=\"/roles/create\" method=\"post\">
-    \t<label for=\"role\">Role: </label> <input type=\"text\" id=\"role\" name=\"role\" value=\"";
-        // line 12
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["role"]) ? $context["role"] : null), "getRole", array(), "method"), "html", null, true);
-        echo "\"/>
-    \t<input type=\"submit\" name=\"commit\" />
-    </form>
-";
+        // line 9
+        echo "    ";
+        $this->loadTemplate("roles/_form.html", "roles/new.html", 9)->display($context);
     }
 
     public function getTemplateName()
@@ -71,6 +63,6 @@ class __TwigTemplate_8978f63baf0910a1c925fe430e0dd3ebcb408c35cda9b2da43dc1b6bf02
 
     public function getDebugInfo()
     {
-        return array (  55 => 12,  52 => 11,  49 => 10,  39 => 5,  36 => 4,  30 => 3,  11 => 1,);
+        return array (  50 => 9,  47 => 8,  39 => 5,  36 => 4,  30 => 3,  11 => 1,);
     }
 }
